@@ -15,7 +15,7 @@ Arbol::~Arbol() {
 void Arbol::construirDesdeInput() {
     int n, valor;
     
-    cout << "=== CONSTRUCCION DEL ARBOL BINARIO POR NIVELES ===\n";
+    cout << "\n=== CONSTRUCCION DEL ARBOL BINARIO POR NIVELES ===\n";
     cout << "Ingrese la cantidad de nodos: ";
     cin >> n;
     
@@ -24,24 +24,27 @@ void Arbol::construirDesdeInput() {
         return;
     }
     
-    // Aqui se un arreglo dinámico temporal (solo para entrada)
+    cout << "\n--- Ingrese los valores ---\n";
     
-    cout << "Ingrese los " << n << " valores separados por espacio: ";
-    
+    // Leyendo la raíz
+    cout << "Nodo 1 (Raiz): ";
     cin >> valor;
     raiz = new Nodo(valor);
     
-    // Cola para llevar el control de los nodos padres
     Cola cola;
     cola.push(raiz);
     
     int contador = 1;
+    int numNodo = 1;
+    
     while (contador < n && !cola.vacia()) {
         Nodo* actual = cola.front();
         cola.pop();
         
         // Asignando hijo izquierdo
         if (contador < n) {
+            numNodo++;
+            cout << "Nodo " << numNodo << " (Hijo izquierdo de nodo " << actual->valor << "): ";
             cin >> valor;
             actual->izquierdo = new Nodo(valor);
             cola.push(actual->izquierdo);
@@ -50,6 +53,8 @@ void Arbol::construirDesdeInput() {
         
         // Asignando hijo derecho
         if (contador < n) {
+            numNodo++;
+            cout << "Nodo " << numNodo << " (Hijo derecho de nodo " << actual->valor << "): ";
             cin >> valor;
             actual->derecho = new Nodo(valor);
             cola.push(actual->derecho);
@@ -59,7 +64,6 @@ void Arbol::construirDesdeInput() {
     
     cout << "\nArbol construido correctamente por niveles.\n";
 }
-
 void Arbol::mostrarArbol() {
     if (raiz == nullptr) {
         cout << "El arbol esta vacio.\n";
